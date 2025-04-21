@@ -304,5 +304,62 @@ i = 3
 함수와 메서드의 차이를 간단하게 알아보자.  
   
 
+## 람다 정의
+- 자바 8부터 도입된 람다는 자바에서 함수형 프로그래밍을 지원하기 위한 핵심 기능이다.
+  - 함수형 프로그래밍에 대해서는 나중에 뒤에서 설명한다.
+- **람다는 익명 함수**이다. 따라서 이름 없는 함수를 표현한다.  
+   
+```java
+package lambda.lambda1;
+
+import lambda.Procedure;
+
+public class InstanceMain {
+
+    public static void main(String[] args) {
+        Procedure procedure1 = new Procedure() {
+            @Override
+            public void run() {
+                System.out.println("hello lambda");
+            }
+        };
+
+        System.out.println("class.class = " + procedure1.getClass());
+        // class.class = class lambda.lambda1.InstanceMain$1 -> 익명 클래스는 $ 표시가 있다.
+        System.out.println("class.Instance = " + procedure1);
+        // class.Instance = lambda.lambda1.InstanceMain$1@452b3a41 익명 클래스의 인스턴스도 $ 표시가 포함되고 뒤에 주소값이 있다.
+
+        Procedure procedure2 = () -> System.out.println("hello lambda");
+
+        System.out.println("lambda.getClass() = " + procedure2.getClass());
+        // lambda.getClass() = class lambda.lambda1.InstanceMain$$Lambda/0x0000007001003618 -> 람다는 $$ 표시가 2개 붙는다.
+        System.out.println("lambda.instance = " + procedure2);
+        // lambda.instance = lambda.lambda1.InstanceMain$$Lambda/0x0000007001003618@f6f4d33 -> 람다의 클래스 참조이다. 0x0000007001003618
+
+    }
+}
+```
+
+```java
+class.class = class lambda.lambda1.InstanceMain$1
+class.Instance = lambda.lambda1.InstanceMain$1@452b3a41
+
+procedure2.getClass() = class lambda.lambda1.InstanceMain$$Lambda/0x0000007001003618
+procedure2.getClass() = lambda.lambda1.InstanceMain$$Lambda/0x0000007001003618@f6f4d33
+```
+  
+- 익명 클래스의 경우 `$`로 구분하고 뒤에 숫자가 붙는다.
+- 람다의 경우 `$$`로 구분하고 뒤에 복잡한 숫자가 붙는다.
+- 실행 환경에 따라 결과는 다를 수 있다.  
+  
+**정리**  
+- 람다를 사용하면 익명 클래스 사용의 보일러플레이트 코드를 크게 줄이고, 간결한 코드로 생산성과 가독성을 높일 수 있다.  
+- 대부분의 익명 클래스는 람다로 대체할 수 있다.
+  - 참고로 람다가 익명 클래스를 완전히 대체할 수 있는 것은 아니다. 람다와 익명 클래스의 차이는 뒤에서 정리한다. 
+- 람다를 사용할 때 `new`키워드를 사용하지 않지만, 람다도 익명 클래스처럼 인스턴스가 생성된다.  
+- 지금은 람다를 익명 클래스의 구현을 간단히 표현할 수 있는 **문법 설탕**(Syntactic sugar, 코드를 간결하게 만드는 문법적 편의)  
+역할 정도로만 생각하자. 람다와 익명 클래스의 차이는 뒤에서 설명한다.  
+  
+
 
   
