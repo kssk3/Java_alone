@@ -1,6 +1,6 @@
-package Lambda.start;
+package lambda.start;
 
-import Lambda.Procedure;
+import lambda.Procedure;
 import java.util.Random;
 
 // 익명 클래스 사용

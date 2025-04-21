@@ -1,4 +1,4 @@
-package Lambda.start;
+package lambda.start;
 
 public class Ex0Main {
     public static void main(String[] args) {

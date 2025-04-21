@@ -1,4 +1,4 @@
-package Lambda.start;
+package lambda.start;
 
 import java.util.Random;
 

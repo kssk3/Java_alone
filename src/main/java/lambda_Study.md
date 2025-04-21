@@ -1,7 +1,7 @@
-# Lambda
+# lambda
 
 ```java
-package Lambda.start;
+package lambda.start;
 
 public class Ex0Main {
     public static void main(String[] args) {
@@ -45,12 +45,12 @@ System.out.println("Hello Spring");
 문자값(**Value**), 숫자값(**Value**)처럼 구체적인 값을 메서드(함수)안에 두는 것이 아니라, **매개변수**(파라미터)를 통해  
 외부에서 전달 받도록 해서, 메서드의 동작을 달리하고, 재사용성을 높이는 방법을 **값 매개변수화(Value Parameterization)** 라 한다.  
   
-### 하나의 메서드에서 실행 할 수 있도록 리팩토링 해보자.  
-  
-```java
-package Lambda.start;
+### 하나의 메서드에서 실행 할 수 있도록 리팩토링 해보자.
 
-import Lambda.Procedure;
+```java
+package lambda.start;
+
+import lambda.Procedure;
 import java.util.Random;
 
 public class Ex1RefMain {
@@ -83,7 +83,7 @@ public class Ex1RefMain {
     static class Print implements Procedure {
         @Override
         public void run() {
-            for(int i = 1; i <= 3; i++){
+            for (int i = 1; i <= 3; i++) {
                 System.out.println("i = " + i);
             }
         }
@@ -121,10 +121,10 @@ public class Ex1RefMain {
 ```
 
 처음에는 생각이 아니질 않아서 컨닝 후 인터페이스를 활용하는 방법을 이해했다.  
-그래서 처음에 내가 작성한 코드는 이런 방식이다.  
+그래서 처음에 내가 작성한 코드는 이런 방식이다.
 
 ```java
-import Lambda.Procedure;
+import lambda.Procedure;
 import java.util.Random;
 
 public class Ex1myRefMain {
@@ -189,12 +189,12 @@ class Print implements Procedure {
   
 ### 익명 클래스 
   
-익명 클래스를 사용해서 코드를 개선해보자.  
-  
-```java
-package Lambda.start;
+익명 클래스를 사용해서 코드를 개선해보자.
 
-import Lambda.Procedure;
+```java
+package lambda.start;
+
+import lambda.Procedure;
 import java.util.Random;
 
 // 익명 클래스 사용, 변수 제거, 익명 클래스의 참조값을 매개변수(파라미터)에 직접 전달
@@ -213,7 +213,7 @@ public class Ex1RefMainV3 {
         hello(new Procedure() {
             @Override
             public void run() {
-                for(int i = 1; i <= 3; i++){
+                for (int i = 1; i <= 3; i++) {
                     System.out.println("i = " + i);
                 }
             }
@@ -243,10 +243,10 @@ i = 3
 메서드 파라미터에 직접 new 객체를 생성해서 익명 클래스를 활용하였다.  
 정상적으로 작동한다.  
   
-### 익명 클래스를 람다로 변경해보자.  
-  
+### 익명 클래스를 람다로 변경해보자.
+
 ```java
-import Lambda.Procedure;
+import lambda.Procedure;
 import java.util.Random;
 
 // 람다 사용
@@ -256,13 +256,13 @@ public class Ex1RefMainV4 {
 
         final String text = "\n안녕하세요\n";
 
-        hello(() ->  {
+        hello(() -> {
             final int randomValue = new Random().nextInt(6) + 1;
             System.out.println("주사위 값 = " + randomValue);
         });
 
         hello(() -> {
-            for(int i = 1; i <= 3; i++){
+            for (int i = 1; i <= 3; i++) {
                 System.out.println("i = " + i);
             }
         });
