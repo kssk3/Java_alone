@@ -360,6 +360,64 @@ procedure2.getClass() = lambda.lambda1.InstanceMain$$Lambda/0x0000007001003618@f
 - 지금은 람다를 익명 클래스의 구현을 간단히 표현할 수 있는 **문법 설탕**(Syntactic sugar, 코드를 간결하게 만드는 문법적 편의)  
 역할 정도로만 생각하자. 람다와 익명 클래스의 차이는 뒤에서 설명한다.  
   
+## 함수형 인터페이스 
+- **함수형 인터페이스**는 정확히 하나의 추상 메서드를 가지는 인터페이스를 말한다.
+- 람다는 추상 메서드가 하나인 **함수형 인터페이스**에만 할당할 수 있다.
+- 단일 추상 메서드를 줄여서 **SAM**(Single Abstract Method)이라 한다.
+- 참고로 람다는 클래스, 추상 클래스에는 할당할 수 없다. 오직 단일 추상 메서드를 가지는 인터페이스에만 할당할 수 있다.
+  
+**여러 추상 메서드**
+```java
+interface NotSamInterface{
+    void run();
+    void go();
+}
+```
+- 단일 추상 메서드가 아니다. 이 인터페이스는 람다를 할당할 수 없다.
+  
+**단일 추상 메서드** 
+```java
+@FunctionalInterface
+interface SamInterface{
+    void run();
+}
+```
+- 여기에는 `run()` 한 개의 추상 메서드만 선언되어 있다.
+- 단일 추상 메서드(SAM)이다. 이 인터페이스는 람다를 할당할 수 있다.
+  
+```java
+package lambda.lambda1;
+
+public class SamMain {
+
+    public static void main(String[] args) {
+        samInterface sam = ()  -> {
+            System.out.println("sam.interface");
+        };
+
+        /*
+        컴파일 오류 notSamInterface의 하나의 abstract void (추상 메서드)만 가질 수 있다.
+        2개 이상 있을 경우 컴파일 에러 발생
+        NotSamInterface notSam = () -> {
+            System.out.println("notSam.interface");
+        };
+        */
+
+        sam.run();
+//        notSam.run();
+    }
+}
+```
+
+단일 추상 메서드를 가지는 인터페이스에 `@FunctionalInterface` 선언하면 이후 누가 추상 메서드를 추가할 경우 컴파일 에러가 발생한다.  
+```java
+java: Unexpected @FunctionalInterface annotation
+    lambda.lambda1.SamInterface is not a functional interface
+      multiple non-overriding abstract methods found in interface
+  lambda.lambda1.SamInterface
+```
+  
+
 
 
   
