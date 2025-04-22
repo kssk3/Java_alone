@@ -7,6 +7,12 @@ public class LambdaPassMain1 {
 
     public static void main(String[] args) {
         MyFunction add = (a, b) -> a + b;
+//        MyFunction add = new MyFunction() {
+//            @Override
+//            public int apply(int a, int b) {
+//                return a + b;
+//            }
+//        };
         MyFunction sub = (a, b) -> a - b;
 
         System.out.println("add.apply(1, 2) = " + add.apply(1, 2));

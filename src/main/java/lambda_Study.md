@@ -417,6 +417,192 @@ java: Unexpected @FunctionalInterface annotation
   lambda.lambda1.SamInterface
 ```
   
+## 람다와 시그니처
+람다를 함수형 인터페이스에 할당할 때는 메서드의 형태를 정의하는 요소인 메서드 시그니처가 일치해야 한다.  
+메서드 시그니처의 주요 구성 요소는 다음과 같다.  
+1. 메서드 이름
+2. 매개변수의 수와 타입(순서 포함)
+3. 반환 타입
+  
+### MyFunction 예시
+예를 들어 `MyFunction`의 `apply`메서드를 살펴보자.  
+  
+```java
+@FunctionalInterface
+public interface MyFunction {
+    int apply(int a, int b);
+}
+```
+이 메서드의 시그니처  
+- 이름 : `apply`
+- 매개 변수 : `int`, `int`
+- 반환 타입 : `int`
+
+```java
+import lambda.MyFunction;
+
+public static void main(String[] args) {
+  MyFunction myFunction = (int a, int b) -> a + b;
+  int result = myFunction.apply(1, 2);
+  System.out.println("myFunction.apply(1, 2)  = " + result);  // result = 3
+}
+```
+  
+람다는 익명 함수이므로 시그니처에서 이름은 제외하고`(int x, int y)`, **매개변수, 반환 타입이 함수형 인터페이스에 선언한 메서드와 맞아야 한다.**  
+이 람다는 매개변수로 `int a`, `int b` 그리고 반환 값으로 `a + b`인 `int` 타입을 반환하므로 시그니처가 맞다.  
+따라서 람다를 함수형 인터페이스에 할당할 수 있다.  
+  
+## 람다 전달 
+
+### 람다를 변수에 대입하기
+  
+```java
+package lambda.lambda2;
+
+import lambda.MyFunction;
+
+// 1. 람다를 변수에 대입하기
+public class LambdaPassMain1 {
+
+    public static void main(String[] args) {
+        MyFunction add = (a, b) -> a + b;
+//        MyFunction add = new MyFunction() {
+//            @Override
+//            public int apply(int a, int b) {
+//                return a + b;
+//            }
+//        };
+        MyFunction sub = (a, b) -> a - b;
+
+        System.out.println("add.apply(1, 2) = " + add.apply(1, 2));
+        System.out.println("sub.apply(1, 2) = " + sub.apply(1, 2));
+
+        MyFunction cal =  add;
+        System.out.println("cal(add).apply(1, 2) = " + cal.apply(1, 2));
+
+        cal = sub;
+        System.out.println("cal(sub).apply(1, 2) = " + cal.apply(1, 2));
+    }
+}
+```
+
+```java
+add.apply(1, 2) = 3
+sub.apply(1, 2) = -1
+cal(add).apply(1, 2) = 3
+cal(sub).apply(1, 2) = -1
+```
+함수형 인터페이스로 선언한 변수에 람다를 대입하는 것은 람다 인스턴스의 참조값을 대입하는 것이다.  
+이해가 잘 안된다면 익명 클래스의 인스턴스를 생성하고 대입한다고 생각해보자. 참고로 함수형 인터페이스도 인터페이스다.  
+  
+람다도 인터페이스 (함수형 인터페이스)를 사용하므로, 람다 인터페이스의 참조값을 변수에 전달할 수 있다.  
+변수에 참조값을 전달할 수 있으므로 다음과 같이 사용할 수 있다.  
+- 매개변수를 통해 메서드(함수)에 람다를 전달할 수 있다. (정확히는 람다 인스턴스의 참조값을 전달)
+- 메서드가 람다를 반환할 수 있다. (정확히는 람다 인스턴스의 참조값을 반환)
+  
+
+### 람다를 메서드(함수)에 전달하기 
+람다는 변수에 전달할 수 있다.  
+같은 원리로 람다를 매개변수를 통해 메서드(함수)에 전달할 수 있다.  
+  
+```java
+import lambda.MyFunction;
+// 2. 람다를 메서드 함수에 전달하기
+public class LambdaPassMain2 {
+
+    public static void main(String[] args) {
+        MyFunction add = (a, b) -> a + b;
+        MyFunction sub = (a, b) -> a - b;
+
+        System.out.println("변수를 통해 전달");
+        calculate(add);
+        calculate(sub);
+
+        System.out.println("람다를 직접 전달");
+        calculate((a, b) -> a + b);
+        calculate((a, b) -> a - b);
+    }
+
+    static void calculate(MyFunction function) {
+        int a = 1;
+        int b = 2;
+
+        System.out.println("계산 시작");
+        int result = function.apply(a, b);
+        System.out.println("계산 결과 = " + result);
+    }
+}
+```
+
+```java
+변수를 통해 전달
+계산 시작
+계산 결과 = 3
+계산 시작
+계산 결과 = -1
+람다를 직접 전달
+계산 시작
+계산 결과 = 3
+계산 시작
+계산 결과 = -1
+```
+
+```java
+void calculate(MyFunction myFunction);
+```
+- `calculate()` 메서드의 매개변수는 `MyFunction`함수형 인터페이스이다. 따라서 람다를 전달할 수 있다.
+
+```java
+// 람다를 변수에 담은 후에 매개변수에 전달 분석
+MyFunction add = (a, b) -> a + b; // 람다 인스턴스 생성
+MyFunction add = 001; // 참조값 반환
+add =001;
+
+calcuate(add);
+calcuate(001);
+
+// 메서드 호출, 매개변수에 참조값 대입
+void calculate(MyFunction myFunction = 001);
+```
+  
+- 람다 인스턴스의 참조를 매개변수에 전달하는 것이기 때문에 이해하는데 어려움은 없을 것이다.
+- 일반적인 참조를 매개변수에 전달하는 것과 같다.  
+  
+### 람다 반환
+  
+```java
+package lambda.lambda2;
+
+import lambda.MyFunction;
+
+public class LambdaPassMain3 {
+
+    public static void main(String[] args) {
+        MyFunction add = getOperation("add");
+        System.out.println("add.apply(1, 2) = " + add.apply(1, 2));
+
+        MyFunction sub = getOperation("sub");
+        System.out.println("sub.apply(1, 2 = " + sub.apply(1, 2));
+
+        MyFunction some = getOperation("xxx");
+        System.out.println("some.apply(1, 2) = " + some.apply(1, 2));
+    }
+
+    // 람다를 반환하는 메서드
+    static MyFunction getOperation(String operation) {
+        switch (operation) {
+            case "add": return (a, b) -> a + b;
+            case "sub": return (a, b) -> a - b;
+            default: return (a, b) -> 0;
+        }
+    }
+}
+```
+```java
+add.apply(1, 2) = 3
+sub.apply(1, 2 = -1
+some.apply(1, 2) = 0
+```
 
 
 
