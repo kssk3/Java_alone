@@ -13,5 +13,12 @@ public class BuildGreeterExample {
 
     public static StringFunction buildGreeter(String greeting) {
         return name -> greeting + ", " + name;
+
+//        return new StringFunction() {
+//            @Override
+//            public String apply(String s) {
+//                return greeting + ", " + s;
+//            }
+//        };
     }
 }

@@ -603,7 +603,120 @@ add.apply(1, 2) = 3
 sub.apply(1, 2 = -1
 some.apply(1, 2) = 0
 ```
+  
+## 함수형 인터페이스
 
+### 기본 함수형 인터페이스  
+  
+**자바가 제공하는 대표적인 함수형 인터페이스**  
+- `Function` : 입력 O, 반환 O
+- `Consumer` : 입력 O, 반환 X
+- `Supplier` : 입력 X, 반환 O
+- `Runnable` : 입력 X, 반환 X
+  
+|       인터페이스        |     메서드 시그니처     |   입력   |   출력   |    대표 사용 예시     |
+|:------------------:|:----------------:|:------:|:------:|:---------------:|
+| **Function<T, R>** | \<R> apple(T t)  | 1개 (T) | 1개 (R) | 데이터 변환, 필드 추출 등 |
+|  **Consumer<T>**   | void accept(T t) | 1개 (T) |   없음   | 로그 출력, DB 저장 등  |
+|  **Supplier<T>**   |     T get()      |   없음   | 1개 (T) |  객체 생성, 값 반환 등  |
+|    **Runnable**    |      run()       |   없음   |   없음   | 스레드 실행 (멀티스레드)  |  
+  
+## 특화 함수형 인터페이스 
+  
+특화 함수형 인터페이스는 의도를 명확하게 만든 조금 특별한 함수형 인터페이스다.  
+- `Predicate` : 입력 O, 반환 `boolean`
+  - 조건 검사, 필터링 용도
+- `Operator(UnaryOperator, BinaryOperator)` : 입력 O, 반환 O
+  - 동일한 타입의 연산 수행, 입력과 같은 타입을 반환하는 연산 용도
+  
+  
+### Predicate
+```java
+@FunctionalInterface
+public interface Predicate<T> {
 
+    boolean test(T t);
+
+    default Predicate<T> and(Predicate<? super T> other) {
+        Objects.requireNonNull(other);
+        return (t) -> test(t) && other.test(t);
+    }
+
+    default Predicate<T> negate() {
+        return (t) -> !test(t);
+    }
+
+    default Predicate<T> or(Predicate<? super T> other) {
+        Objects.requireNonNull(other);
+        return (t) -> test(t) || other.test(t);
+    }
+
+    static <T> Predicate<T> isEqual(Object targetRef) {
+        return (null == targetRef)
+                ? Objects::isNull
+                : object -> targetRef.equals(object);
+    }
+
+    @SuppressWarnings("unchecked")
+    static <T> Predicate<T> not(Predicate<? super T> target) {
+        Objects.requireNonNull(target);
+        return (Predicate<T>)target.negate();
+    }
+}
+```
+지금은 추상 메서드 `test()` 대해서만 알아보자.  
+  
+- Predicate는 수학/논리학에서 "술어"를 의마하며, 참/거짓을 판별하는 명제를 표현한다.
+  - 술어: 어떤 대상의 성질이나 관계를 설명하면서 그 설명이 참인지 거짓인지를 판단할 수 있게 해주는 표현
+- test는 "시험하다"라는 의미로, 주어진 입력값이 조건을 만족하는지 테스트한다는 의미이다. 그래서 반환값이 `boolean`이다.
+  
+```java
+import java.util.function.Predicate;
+
+public class PredicateMain {
+  public static void main(String[] args) {
+
+    Predicate<Integer> predicate1 = new Predicate<Integer>() {
+      @Override
+      public boolean test(Integer integer) {
+        return integer > 2;
+      }
+    };
+    System.out.println("predicate1.test() = " + predicate1.test(1)); // predicate1.test() = false
+
+    Predicate<Integer> predicate2 = n -> n / 2 == 1;
+    System.out.println("predicate2.test() = " + predicate2.test(3)); // predicate2.test() = true
+  }
+}
+
+```
+  
+### Predicate가 꼭 필요한가?
+`Predicate`는 입력이 `T` 반환이 `boolean`이기 때문에 결과적으로 `Function<T, Boolean>`으로 대체할 수 있다.  
+그럼에도 불구하고 `Predicate`를 별도로 만드는 이유는 다음과 같다.  
+  
+```java
+Function<Integer, Boolean> f1 = value -> value % 2 == 0;
+Predicate<Integer> f1 = value -> value % 2 == 0;
+```
+`Predicate<T>`는 "입력 값을 받아 `ture/false`로 결과를 판단한다"라는 **의도를 명시적으로 드러내기 위해 정의**된 함수이다.  
+물론 "`boolean`을 반환하는 함수"라는 측면에서 보면 `Function<T, Boolean>`으로 충분히 구현할 수 있다.  
+하지만 `Predicate<T>`를 별도로 둠으로써 다음돠 같은 이점들을 얻을 수 있다.  
+  
+- **의미 명확성**
+  - `Predicate<T>`를 사용하면 "이 함수는 조건을 검사하거나 필터링 용도로 쓰인다"라는 **의도가 더 분명**해 진다.
+  - `Function<T, Boolean>`을 쓰면 "이 함수는 무언가를 계산해 `Boolean`을 반환한다"라고 볼 수 있지만,  
+  "조건 검사"라는 목적이 분명히 드러나지 않을 수 있다.  
+- **가독성 및 유지보수성**  
+  - 여러 사람과 협업하는 프로젝트에서, "조건을 판단하는 함수"는 `Predicate<T>`라는 패턴을 사용하므로써 의미 전달이 명확해진다.  
+  
+**의도가 가장 중요한 핵심**  
+자바가 제공하는 다양한 함수형 인터페이스들을 선택할 때는 단순히 입력값, 반환값만 보고 선택하는게 아니라 해당 함수형 인터페이스가 제공하는  
+**의도**가 중요하다. 예를 들어서 조건 검사, 필터링 등을 사용한다면 `Function`이 아니라 `Predicate`를 선택해야 한다.  
+그래야 "다른 개발자가 의도를 파악하고 조건 검사등에 사용할 의도가 있구나"하고 코드를 더욱 쉽게 이해할 수 있다.  
+  
+### Operator  
+Operator는 `UnaryOperator`, `BinaryOperator` 2가지 종류가 제공된다.  
+  
 
   

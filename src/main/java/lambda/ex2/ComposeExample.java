@@ -14,6 +14,7 @@ public class ComposeExample {
         return new MyTransformer() {
             @Override
             public String transform(String s) {
+                // MyTransformer 인터페이스는 String 반환하기 때문에 가능하다.
                 String intermediate = first.transform(s);
                 return second.transform(intermediate);
             }

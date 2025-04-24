@@ -10,7 +10,7 @@ public class TargetType1 {
         // 그리고 매개변수 값도 Integer를 받고 String을 반환하는 인터페이스이기 때문에 컴파일이 정상적으로 작동하지 않는다.
         // FunctionB functionB1 = functionA
         FunctionB functionB2 = functionB;
-        System.out.println("functionB.apply(15) = " + functionB.apply(15));
+        System.out.println(functionB.apply(15));
 
     }
 

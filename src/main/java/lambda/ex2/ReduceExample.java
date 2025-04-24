@@ -9,6 +9,12 @@ public class ReduceExample {
         System.out.println("리스트 : " + list);
 
         int sum = reduce(list, 0, (a, b) -> a + b);
+//        int sum = reduce(list, 0, new MyReducer() {
+//            @Override
+//            public int reduce(int a, int b) {
+//                return a + b;
+//            }
+//        });
         System.out.println("합 (누적 +) : " + sum);
 
         int mul = reduce(list, 1, (a, b) -> a * b);
@@ -20,5 +26,5 @@ public class ReduceExample {
             initial = reducer.reduce(i, initial);
         }
         return initial;
-    };
+    }
 }
