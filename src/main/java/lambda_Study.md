@@ -718,5 +718,81 @@ Predicate<Integer> f1 = value -> value % 2 == 0;
 ### Operator  
 Operator는 `UnaryOperator`, `BinaryOperator` 2가지 종류가 제공된다.  
   
-
+**용어 설명**
+- Operator라는 이름은 수학적인 연산자(Operator)의 개념에서 왔다.  
+- 수학에서 연산자는 보통 **같은 타입의 값들을 받아서 동일한 타입의 결과를 반환**한다.
+- 자바에서는 수학처럼 숫자의 연산에만 사용된다기 보다는 입력과 반환이 동일한 타입의 연산에 사용할 수 있다.  
+  예를 들어 문자를 입력해서 대문자로 바꾸어 변환하는 작업도 될 수 있다.  
   
+### UnaryOperator(단항 연산)
+```java
+@FunctionalInterface
+public interface UnaryOperator<T> extends Function<T, T> {
+    
+    T apply(T t) // 실제 코드가 있지는 않음 상속한 Function에서 있음 
+    
+    static <T> UnaryOperator<T> identity() {
+        return t -> t;
+    }
+}
+```
+
+### BinaryOperator(이항 연산)
+```java
+@FunctionalInterface
+  public interface BinaryOperator<T> extends BiFunction<T,T,T> {
+T apply(T t1, T t2); // 실제 코드가 있지는 않음 }
+```
+
+```java
+public class OperatorMain {
+
+    public static void main(String[] args) {
+        // UnaryOperator
+        Function<Integer, Integer> square1 = n -> n * n;
+        System.out.println("square1.apply(5) = " + square1.apply(5));
+
+        UnaryOperator<Integer> square2 = n -> n * n;
+        System.out.println("square2.apply(5) = " + square2.apply(5) + "\n");
+
+        // BinaryOperator
+        BiFunction<Integer, Integer, Integer> addiction1 = (n1, n2) -> n1 * n2;
+        System.out.println("addiction1.apply(5, 5) = " + addiction1.apply(5, 5));
+
+        BinaryOperator<Integer> addiction2 = (n1, n2) -> n1 * n2;
+        System.out.println("addiction2.apply(5, 5) = " + addiction2.apply(5, 5));
+    }
+}
+```
+```java
+square1.apply(5) = 25
+square2.apply(5) = 25
+
+addiction1.apply(5, 5) = 25
+addiction2.apply(5, 5) = 25
+```
+  
+### Operator를 제공하는 이유
+`Function<T, R>`와 `BiFunction<T, U, R>`만으로도 사실상 거의 모든 함수형 연산을 구현할 수 있지만,  
+`UnaryOperator<T>`와 `BinaryOperator<T>`를 별도로 제공하는 이유는 다음과 같다.  
+  
+```java
+Function<Integer, Integer> f1 = x -> x * x;
+UnaryOperator<Integer> f2 = x -> x * x;
+
+Function<Integer, Integer, Integer> f1 = (a, b) -> a + b;
+BinaryOperator<Integer> f2 = (a, b) -> a + b;
+```
+  
+- **의도(목적)의 명시성**
+  - `UnaryOperator<T>`는 입력과 출력 타입이 **동일**한 "단항 연산"을 수행한다는 것을 한눈에 보여준다.
+  - `BinaryOperator<T>`는 같은 다입을 **두 개** 입력받아 같은 타입을 결과로 반환하는 "이항 연산"을 수행한다는 것을 명확히 드러낸다.  
+    - 예: `Integer`와 `Integer`를 받아서 `Integer` 결과를 만드는 연산 (최대값 구하기, 덧셈 등)
+  - 만약 모두 `Function<T, R>` 또는 `BiFunction<T, U, R>` 만으로 처리한다면, "타입이 같은 연산"임을 코드만 보고 즉시 파악하기 어렵다.  
+- **가독성과 유지보수**  
+  - 코드에 `UnaryOperator<T>`가 등장하면 단항 연산자인지 바로 알 수 있다.  
+  - `BinaryOperator<T>`의 경우도, 같은 타입 두 개를 받아 같은 타입으로 반환하는 것을 명확하게 알 수 있다.  
+  - 여러 사람이 협업하는 프로젝트에서는 이런 명시성이 **코드 가독성**과 **유지보수성**에 큰 도움이 된다.  
+  
+
+
