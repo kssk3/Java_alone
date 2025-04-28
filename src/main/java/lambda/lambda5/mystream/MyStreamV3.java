@@ -17,10 +17,10 @@ public class MyStreamV3<T> {
 
     // static factory
     public static <T> MyStreamV3<T> of(List<T> internalList) {
-        return new MyStreamV3(internalList);
+        return new MyStreamV3<>(internalList);
     }
 
-    public MyStreamV3 <T>  filter (Predicate<T> predicate) {
+    public MyStreamV3<T> filter(Predicate<T> predicate) {
         List<T> filtered = new ArrayList<>();
         for (T t : internalList) {
             if (predicate.test(t)) {
@@ -30,7 +30,7 @@ public class MyStreamV3<T> {
         return MyStreamV3.of(filtered);
     }
 
-    public <R> MyStreamV3 <R> map(Function<T, R> mapper) {
+    public <R> MyStreamV3<R> map(Function<T, R> mapper) {
         List<R> mapped = new ArrayList<>();
         for (T t : internalList) {
             mapped.add(mapper.apply(t));
