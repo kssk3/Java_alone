@@ -3,7 +3,7 @@ package methodref;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class MethodRefEx2 {
+public class MethodRef2 {
 
     public static void main(String[] args) {
         // 1. 정적 메서드 참조
