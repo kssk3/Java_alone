@@ -42,6 +42,10 @@ public class MyStreamV3<T> {
         return internalList;
     }
 
+    public T getFirst() {
+        return internalList.getFirst();
+    }
+
     // 추가
     public void forEach(Consumer<T> consumer) {
         for (T t : internalList) {
