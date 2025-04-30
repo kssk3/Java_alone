@@ -30,7 +30,12 @@ public class MapVsFlatMapMain {
                 .flatMap(list -> list.stream())
                 .distinct().
                 toList();
-
         System.out.println("result2 = " + result2);
+
+//        Stream<List<Integer>> stream = outerList.stream();
+//        Stream<Integer> stream2 = stream.flatMap(list -> list.stream());
+//        List<Integer> list = stream2.toList();
+//        System.out.println("list = " + list);
+
     }
 }
