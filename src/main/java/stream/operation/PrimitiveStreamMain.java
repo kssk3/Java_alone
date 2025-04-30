@@ -3,6 +3,7 @@ package stream.operation;
 import java.util.IntSummaryStatistics;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 public class PrimitiveStreamMain {
 
@@ -49,6 +50,10 @@ public class PrimitiveStreamMain {
         double sum = IntStream.range(1, 5).mapToDouble(n -> n * 1.5).sum();
         System.out.println("sum = " + sum);
         System.out.println();
+
+        System.out.println("기본형 박싱 -> Wrapper 객체 스트림으로 변환");
+        Stream<Integer> boxed = IntStream.of(1, 2, 3, 4, 5).boxed();
+        boxed.forEach(n -> System.out.print(n + " "));
 
 
     }
