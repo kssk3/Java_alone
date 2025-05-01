@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class CollectorsMap {
+public class Collectors2Map {
     public static void main(String[] args) {
 
 

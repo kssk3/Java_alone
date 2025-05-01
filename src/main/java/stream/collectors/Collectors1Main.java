@@ -5,14 +5,13 @@ import static java.util.stream.Collectors.*;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class CollectorsMain {
+public class Collectors1Main {
 
     public static void main(String[] args) {
 
-        System.out.println("1. 변경 가능한 toList() ");
+        System.out.println("1. 변경 가능한 toList()");
         List<Integer> list = Stream.of(1, 2, 3, 4, 5)
                 .collect(toList());
         System.out.println("list = " + list);
