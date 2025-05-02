@@ -1,8 +1,7 @@
-package Optional;
+package optional;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class OptionalStartMain1 {
 
