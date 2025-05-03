@@ -1,48 +1,36 @@
 package optional;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
-import javax.swing.text.html.Option;
+import java.util.function.Supplier;
 
 public class OptionalMain {
+
+    static String email = "16516541-151654195-152121";
     public static void main(String[] args) {
 
-//        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
-//        Optional<List<Integer>> optionalNumbers = Optional.of(numbers);
-//
-//        List<Integer> list = optionalNumbers.stream().
-//                flatMap(List::stream).
-//                filter(n -> n > 2).toList();
+        Optional<String> emailA = Optional.of(email);
+        Optional<String> emailB = Optional.of(email);
 
-        OptionalMain test = new OptionalMain();
-        test.findUserEmailOrElse(); // 즉시 평가
-        // getUserName() Called
-        // result1 = Min
+        System.out.println("=== 즉시 연산 ===");
+        String result1 = emailA.orElse(findOrElseEmail());
+        System.out.println("result1 = " + result1);
         System.out.println();
-        test.findUserEmailOrElseGet(); // 지연 평가
-        // result1 = Min
+
+        System.out.println("=== 지연 연산 ===");
+        String result2 = emailB.orElseGet(() -> findOrElseGetEmail());
+        //String result2 = emailB.orElseGet(OptionalMain::findOrElseGetEmail);
+        System.out.println("result2 = " + result2);
 
     }
-
-    public void findUserEmailOrElse(){
-        String optValue = "Min";
-        String result1 = Optional.ofNullable(optValue)
-                .orElse(getUserName());
-
-        System.out.println("result1 = " + result1);
+    static String findOrElseEmail() {
+        System.out.println("이메일 데이터를 찾고 있습니다.");
+        String email = "0000000_000000_00000";
+        return email;
     }
 
-    public void findUserEmailOrElseGet(){
-        String optValue = "Min";
-        String result1 = Optional.ofNullable(optValue)
-                .orElseGet(this::getUserName);
-
-        System.out.println("result1 = " + result1);
-    }
-
-    private String getUserName() {
-        System.out.println("getUserName() Called");
-        return "Unknown";
+    static String findOrElseGetEmail() {
+        System.out.println("이메일 데이터를 찾고 있습니다.");
+        String email = "0000000_000000_00000";
+        return email;
     }
 }
