@@ -1,6 +1,6 @@
-package Moden_Java.chap03;
+package modern_Java.chap03;
 
-import Moden_Java.chap02.Apple;
+import modern_Java.chap02.Apple;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;

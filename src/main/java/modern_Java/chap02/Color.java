@@ -1,4 +1,4 @@
-package Moden_Java.chap02;
+package modern_Java.chap02;
 
 public enum Color {
     GREEN("Green"), YELLOW("Yellow"), RED("Red"),;

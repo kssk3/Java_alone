@@ -1,4 +1,4 @@
-package Moden_Java.chap02.Behavior_Parameterization;
+package modern_Java.chap02.Behavior_Parameterization;
 
 import java.util.Arrays;
 import java.util.List;

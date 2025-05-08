@@ -1,6 +1,6 @@
-package Moden_Java.chap01;
+package modern_Java.chap01;
 
-import Moden_Java.chap02.Apple;
+import modern_Java.chap02.Apple;
 import java.util.List;
 
 public class FilterMain1 {

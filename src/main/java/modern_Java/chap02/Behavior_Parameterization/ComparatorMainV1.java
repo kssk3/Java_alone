@@ -1,9 +1,6 @@
-package Moden_Java.chap02.Behavior_Parameterization;
+package modern_Java.chap02.Behavior_Parameterization;
 
-import Moden_Java.chap02.Apple;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
+import modern_Java.chap02.Apple;
 import java.util.List;
 
 public class ComparatorMainV1 {

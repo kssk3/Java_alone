@@ -1,7 +1,7 @@
-package Moden_Java.chap02;
+package modern_Java.chap02;
 
 
-import static Moden_Java.chap02.Color.RED;
+import static modern_Java.chap02.Color.RED;
 
 public class RedApplePredicate implements ApplePredicate<Apple> {
     @Override

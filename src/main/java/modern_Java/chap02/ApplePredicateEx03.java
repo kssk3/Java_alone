@@ -1,4 +1,4 @@
-package Moden_Java.chap02;
+package modern_Java.chap02;
 
 import java.util.ArrayList;
 import java.util.List;

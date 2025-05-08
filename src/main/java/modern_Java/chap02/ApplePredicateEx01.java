@@ -1,6 +1,6 @@
-package Moden_Java.chap02;
+package modern_Java.chap02;
 
-import static Moden_Java.chap02.Color.*;
+import static modern_Java.chap02.Color.*;
 
 import java.util.List;
 
