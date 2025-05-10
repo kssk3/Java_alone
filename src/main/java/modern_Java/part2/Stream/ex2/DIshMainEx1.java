@@ -18,5 +18,13 @@ public class DIshMainEx1 {
                 new Dish("prawns", false, 300, Type.FISH),
                 new Dish("salmon", false, 450, Type.FISH)
         );
+
+        List<String> threeHighCaloricDishNames = menu.stream()
+                .filter(d -> d.getCalories() > 300)
+                .map(Dish::getName)
+                .limit(3)
+                .toList();
+
+        System.out.println("threeHighCaloricDishNames = " + threeHighCaloricDishNames);
     }
 }

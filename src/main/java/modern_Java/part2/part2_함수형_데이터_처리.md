@@ -83,6 +83,44 @@ lowCaloriesMenus = [Dish{name='말랑카우', calories=360}, Dish{name='차돌�
 여러 연산을 파이프라인으로 연결해도 여전히 가독성과 명확성이 유지된다.  
   
 ### 4.2 스트림 시작하기
+  
+간단한 스트림 작업인 컬렉션 스트림부터 살펴보자. 자바 8 컬렉션에는 스트림을 반환하는 stream 메서드가 추가됐다.  
+
+스트림이란 적확히 뭘까? 스트림이란 **데이터 처리 연산을 지원하도록 소스에서 추출된 연속된 요소**로 정의할 수 있다.  
+  
+스트림에는 두 가지 중요 특징이 있다.  
+- **파이프라이닝** : 대부분의 스트림 연산은 스트림 연산끼리 연결해서 커다란 파이프라인을 구성할 수 있도록 스트림 자신을 반환한다.  
+그 덕분에 **게으름(Lazy)**, **쇼트서킷** 같은 최적화도 얻을 수 있다. 연산 파이프라인은 데이터 소스에 적용하는 데이터베이스 질의와 비슷하다.  
+- **내부 반복** : 반복자를 이용해서 명시적으로 반복하는 컬렉션과 달리 스틂은 내부 반복을 지원한다.  
+  
+```java
+
+public class DIshMainEx1 {
+    public static void main(String[] args) {
+        List<Dish> menu = Arrays.asList(
+                new Dish("pork", false, 800, Type.MEAT),
+                new Dish("beef", false, 700, Type.MEAT),
+                new Dish("chicken", false, 400, Type.MEAT),
+                new Dish("french fries", true, 530, Type.OTHER),
+                new Dish("rice", true, 350, Type.OTHER),
+                new Dish("season fruit", true, 120, Type.OTHER),
+                new Dish("pizza", true, 550, Type.OTHER),
+                new Dish("prawns", false, 300, Type.FISH),
+                new Dish("salmon", false, 450, Type.FISH)
+        );
+
+        List<String> threeHighCaloricDishNames = menu.stream() // 메뉴(요리 리스트)에서 스트림을 얻는다.
+                .filter(d -> d.getCalories() > 300) // 고칼로리 요리를 필터링한다.
+                .map(Dish::getName)// 요리명 추출
+                .limit(3)// 선착순 세 개만 선택
+                .toList();// 결과를 다른 리스트로 저장
+
+        System.out.println("threeHighCaloricDishNames = " + threeHighCaloricDishNames);
+    }
+}
+
+// threeHighCaloricDishNames = [pork, beef, chicken]
+```
 
 ## 스트림 활용
 
