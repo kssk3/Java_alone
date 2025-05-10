@@ -6,7 +6,6 @@ public class lambdaCapturing {
 
         int portNumber = 8080;
         Runnable r = () -> System.out.println(portNumber);
-        portNumber++;
         process(r);
     }
 
