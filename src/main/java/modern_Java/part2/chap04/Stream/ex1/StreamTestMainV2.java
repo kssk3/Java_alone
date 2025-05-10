@@ -1,4 +1,4 @@
-package modern_Java.part2.Stream.ex1;
+package modern_Java.part2.chap04.Stream.ex1;
 
 import java.util.Comparator;
 import java.util.List;

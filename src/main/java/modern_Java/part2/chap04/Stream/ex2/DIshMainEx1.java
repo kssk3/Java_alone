@@ -1,8 +1,8 @@
-package modern_Java.part2.Stream.ex2;
+package modern_Java.part2.chap04.Stream.ex2;
 
 import java.util.Arrays;
 import java.util.List;
-import modern_Java.part2.Stream.ex2.Dish.Type;
+import modern_Java.part2.chap04.Stream.ex2.Dish.Type;
 
 public class DIshMainEx1 {
     public static void main(String[] args) {

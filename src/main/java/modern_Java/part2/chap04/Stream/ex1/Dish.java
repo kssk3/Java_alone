@@ -1,4 +1,4 @@
-package modern_Java.part2.Stream.ex1;
+package modern_Java.part2.chap04.Stream.ex1;
 
 public class Dish {
     private String name;

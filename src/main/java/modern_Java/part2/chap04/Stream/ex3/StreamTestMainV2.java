@@ -1,8 +1,8 @@
-package modern_Java.part2.Stream.ex3;
+package modern_Java.part2.chap04.Stream.ex3;
 
 import java.util.Arrays;
 import java.util.List;
-import modern_Java.part2.Stream.ex3.Dish.Type;
+import modern_Java.part2.chap04.Stream.ex3.Dish.Type;
 
 public class StreamTestMainV2 {
     public static void main(String[] args) {
