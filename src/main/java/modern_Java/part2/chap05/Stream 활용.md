@@ -85,3 +85,50 @@ public class StreamSlicingMainV1 {
 // result = [210, 250, 310]
 ```
   
+### 5.8.5 함수로 무한 스트림 만들기  
+  
+스트림 API는 함수에서 스트림을 만들 수 있는 두 정적 메서드 Stream.iterate와 Stream.generate를 제공한다.  
+두 연산을 이용해서 **무한 스트림**, 즉 고정된 컬렉션에서 고정된 크기로 스트림을 만들었던 것과는 달리 크기가 고정되지 않은  
+스트림을 만들 수 있다.  
+  
+```java
+public static<T> Stream<T> iterate(final T seed, final UnaryOperator<T> f) 
+```  
+```java
+List<Integer> result1 = Stream.iterate(1, n -> n + 2)
+        .limit(5)
+        .toList();
+System.out.println("result1 = " + result1);
+
+List<Integer> result2 = Stream.iterate(0, n -> n + 2)
+        .limit(10)
+        .toList();
+System.out.println("result2 = " + result2);
+
+// result1 = [1, 3, 5, 7, 9]
+// result2 = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+```  
+  
+iterate 메서드는 초깃값과 람다(`UnaryOperator<T>` 사용)를 인수로 받아서 새로운 값을 끊임없이 생산할 수 있다.  
+iterate는 요청할 때마다 값을 생산할 수 있으며 끝이 없으므로 **무한 스트림**을 만든다. 이러한 스트림을 **언바운드 스트림**이라고 표현한다.  
+예제에서 limit 메서드를 이용해서 스트림의 크기를 명시적으로 작성했지만 limit을 설정하지 않을 경우 무한 스트림이므로 최종 연산까지 불러올 수 없다.  
+`limit`을 설정하지 않을 경우 쓸모 없는 스트림을 생선한 것과 같다.  
+  
+### generate 메서드
+  
+iterate와 비슷하게 generate도 요구할 때 값을 계산하는 무한 스트림을 만들 수 있다. 하지만 iterate와 달리 generate는  
+생산된 각 값을 연속적으로 계산하지 않는다. generate는 `Supplier<T>`를 인수로 받아서 새로운 값을 생산한다.   
+  
+```java
+Stream.generate(Math::random)
+.limit(5)
+.forEach(System.out::println);
+
+// 0.7579631740758049
+// 0.012014378912227786
+// 0.6307140108638752
+// 0.8074415490570976
+// 0.522283568951757
+```
+  
+
