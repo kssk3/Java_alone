@@ -30,7 +30,7 @@
 ### Optional.of(), ofNullable(), empty()
 ```java
 public class OptionalMain {
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         Optional<Integer> optValue1 = Optional.of(100);
         Optional<Integer> optValue2 = Optional.ofNullable(100);
         Optional<Integer> optEmpty1 = Optional.ofNullable(null);
@@ -66,7 +66,7 @@ public boolean isEmpty() { return value == null; }
 ```
 
 ```
-   public static void main(String[] args) {
+   public static void Main(String[] args) {
         Optional<String> optValue = Optional.ofNullable("100");
         Optional<String> optEmpty = Optional.ofNullable(null);
 
@@ -85,7 +85,7 @@ public T get() {
         return value;}
 ```
 ```java
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         Optional<String> optValue = Optional.ofNullable("100");
         Optional<String> optEmpty = Optional.ofNullable(null);
 
@@ -102,7 +102,7 @@ public T get() {
 ```
 
 ```java
-public static void main(String[] args) {
+public static void Main(String[] args) {
     Optional<Integer> optValue = Optional.ofNullable(100);
     Optional<Integer> optEmpty = Optional.ofNullable(null);
 
@@ -121,7 +121,7 @@ public T orElseGet(Supplier<? extends T> supplier) {
 ```
 
 ```java
-public static void main(String[] args) {
+public static void Main(String[] args) {
     Optional<Integer> optValue = Optional.ofNullable(100);
     Optional<Integer> optEmpty = Optional.ofNullable(null);
 
@@ -145,7 +145,7 @@ public static void main(String[] args) {
 
 public class OptionalMain {
     static String email = "16516541-151654195-152121";
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
       Optional<String> emailA = Optional.ofNullable(email);
       Optional<String> emailB = Optional.ofNullable(email);
 

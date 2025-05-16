@@ -14,7 +14,7 @@ public interface Predicate<T> {
     boolean test(T t);
     
 public class StreamSlicingMainV1 {
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
 
         List<Integer> numbers = List.of(150, 170, 210, 250, 310, 350);
         System.out.println("numbers = " + numbers);
@@ -34,7 +34,7 @@ public class StreamSlicingMainV1 {
 ```java
 
 public class StreamSlicingMainV1 {
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
 
         List<Integer> numbers = List.of(150, 170, 210, 250, 310, 350);
         System.out.println("numbers = " + numbers);
@@ -69,7 +69,7 @@ public class StreamSlicingMainV1 {
   
 ```java
 public class StreamSlicingMainV1 {
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         List<Integer> numbers = List.of(150, 170, 210, 250, 310, 350);
         System.out.println("numbers = " + numbers);
 

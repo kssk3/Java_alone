@@ -50,7 +50,7 @@ button.setOnClickListener(v -> System.out.println("버튼 클릭"))
 ```java
 public class OuterMain {
     private String name = "외부클래스";
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         OuterMain outerMain = new OuterMain();
         System.out.println("[외부 클래스]" + outerMain);
         System.out.println("======================================");

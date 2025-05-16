@@ -11,7 +11,7 @@
 **스트림을 사용하지 않은 리스트 정리**  
 ```java
 public class StreamTestMainV1 {
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         List<Dish> menu = List.of(
                 new Dish("말랑카우", 360),
                 new Dish("스파게티", 410),
@@ -52,7 +52,7 @@ lowCaloriesNames = [Dish{name='말랑카우', calories=360}, Dish{name='차돌�
 ```java
 
 public class StreamTestMainV2 {
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
 
         List<Dish> menu = List.of(
                 new Dish("말랑카우", 360),
@@ -96,7 +96,7 @@ lowCaloriesMenus = [Dish{name='말랑카우', calories=360}, Dish{name='차돌�
 ```java
 
 public class DIshMainEx1 {
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         List<Dish> menu = Arrays.asList(
                 new Dish("pork", false, 800, Type.MEAT),
                 new Dish("beef", false, 700, Type.MEAT),
@@ -146,7 +146,7 @@ public class DIshMainEx1 {
   
 ```java
 public class StreamTestMainV1 {
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
 
         List<String> title = List.of("java8", "In", "Action");
         title.stream()

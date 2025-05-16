@@ -4,7 +4,7 @@
 package lambda.start;
 
 public class Ex0Main {
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
 //        helloJava();
 //        helloSpring();
         helloSomething("Hello Java");
@@ -55,7 +55,7 @@ import java.util.Random;
 
 public class Ex1RefMain {
 
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         Procedure dice = new Dice();
         Procedure print = new Print();
 
@@ -129,7 +129,7 @@ import java.util.Random;
 
 public class Ex1myRefMain {
 
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         new Dice().run();
         new Print().run();
     }
@@ -200,7 +200,7 @@ import java.util.Random;
 // 익명 클래스 사용, 변수 제거, 익명 클래스의 참조값을 매개변수(파라미터)에 직접 전달
 public class Ex1RefMainV3 {
 
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
 
         hello(new Procedure() {
             @Override
@@ -252,7 +252,7 @@ import java.util.Random;
 // 람다 사용
 public class Ex1RefMainV4 {
 
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
 
         final String text = "\n안녕하세요\n";
 
@@ -316,7 +316,7 @@ import java_ad3.lambda.Procedure;
 
 public class InstanceMain {
 
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         Procedure procedure1 = new Procedure() {
             @Override
             public void run() {
@@ -392,7 +392,7 @@ import java_ad3.lambda.lambda1.samInterface;
 
 public class SamMain {
 
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         samInterface sam = () -> {
             System.out.println("sam.interface");
         };
@@ -443,7 +443,7 @@ public interface MyFunction {
 ```java
 import java_ad3.lambda.MyFunction;
 
-public static void main(String[] args) {
+public static void Main(String[] args) {
     MyFunction myFunction = (int a, int b) -> a + b;
     int result = myFunction.apply(1, 2);
     System.out.println("myFunction.apply(1, 2)  = " + result);  // result = 3
@@ -466,7 +466,7 @@ import java_ad3.lambda.MyFunction;
 // 1. 람다를 변수에 대입하기
 public class LambdaPassMain1 {
 
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         MyFunction add = (a, b) -> a + b;
 //        MyFunction add = new MyFunction() {
 //            @Override
@@ -513,7 +513,7 @@ import java_ad3.lambda.MyFunction;
 // 2. 람다를 메서드 함수에 전달하기
 public class LambdaPassMain2 {
 
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         MyFunction add = (a, b) -> a + b;
         MyFunction sub = (a, b) -> a - b;
 
@@ -580,7 +580,7 @@ import java_ad3.lambda.MyFunction;
 
 public class LambdaPassMain3 {
 
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         MyFunction add = getOperation("add");
         System.out.println("add.apply(1, 2) = " + add.apply(1, 2));
 
@@ -680,7 +680,7 @@ public interface Predicate<T> {
 import java.util.function.Predicate;
 
 public class PredicateMain {
-  public static void main(String[] args) {
+  public static void Main(String[] args) {
 
     Predicate<Integer> predicate1 = new Predicate<Integer>() {
       @Override
@@ -753,7 +753,7 @@ T apply(T t1, T t2); // 실제 코드가 있지는 않음 }
 ```java
 public class OperatorMain {
 
-    public static void main(String[] args) {
+    public static void Main(String[] args) {
         // UnaryOperator
         Function<Integer, Integer> square1 = n -> n * n;
         System.out.println("square1.apply(5) = " + square1.apply(5));
