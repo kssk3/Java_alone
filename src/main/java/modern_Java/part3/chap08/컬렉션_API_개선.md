@@ -187,3 +187,37 @@ System.out.println("After numbers = " + numbers);
 `computeIfPresent` 메서드는 현재 키와 관련된 값이 맵에 존재하며 널이 아닐 때만 새 값을 계산한다.  
 이 메서드의 미묘한 실행 과정에 주목하자. 값을 만드는 함수가 널을 반환하면 현재 매핑을 맵에서 제거한다.  
 하지만 매핑을 제거할 때는 remove 메서드를 오버라이드하는 것이 더 적합하다.  
+  
+### 개선된 ConcurrentHashMap
+
+`ConcurrentHashMap` 클래스는 동시성 친화적이며 최신 기술을 반영한 HashMap 버전이다.  
+`ConcurrentHashMap`은 내부 자료구조의 특정 부분만 잠궈 동시 추가, 갱신 작업을 허용한다.   
+따라서 동기화된 Hashtable 버전에 비해 읽기 쓰기 연산 성능이 월등하다. (표준 HashMap은 비동기로 동작한다.)  
+  
+다음처럼 키에 함수 받기, 값, Map.Entry, (키, 값) 인수를 이용한 네 가지 연산 형태를 지원한다.  
+- 키, 값으로 연산 (forEach, reduce, search)
+- 키로 연산 (forEachKey, reduceKeys, searchKeys)
+- 값으로 연산 (forEachValue, reduceValues, searchValues)
+- Map.Entry 객체로 연산 (forEachEntry, reduceEntries, searchEntries)
+  
+이들 연산은 `ConcurrentHashMap`의 상태를 잠그지 않고 연산을 수행한다는 점을 주목하자.  
+따라서 이들 연산에 제동한 함수는 계산이 진행되는 동안 바뀔 수 있는 객체, 값, 순서 등에 의존하지 않아야 한다.  
+  
+또한 이들 연산에 병렬성 기준값 `(threshold)`을 지정해야 한다.   
+맵의 크기가 주어진 기준값보다 작으면 순차적으로 연산을 실행한다.  
+기준값을 1로 지정하면 공통 스레드 풀을 이용해 병렬성을 극대화한다.  
+`Long.MAX_VALUE`를 기준값으로 설정하면 한 개의 스레드로 연산을 실행한다.  
+기준값 규칙을 따르는 것이 좋다. 
+  
+### 정리
+- 자바 9는 바꿀 수 없는 리스트, 집합, 맵을 쉽게 만들 수 있도록 `List.of`, `Set.of`, `Map.ofEntries` 등의   
+컬렉션 팩토리를 지원한다.  
+- 이들 컬렉션 팩토리가 반환한 객첸는 만들어진 다음 바꿀 수 없다.  
+- List 인터페이스는 removeIf, replaceAll, sort 세 가지 디폴트 메서드를 지원한다.
+- Set 인터페이스는 removeIf 디폴트 메서드를 지원한다.
+- Map 인터페이스는 자주 사용하는 패턴과 버그를 방지할 수 있도록 다양한 디폴트 메서드를 지원한다.
+- ConcurrentHashMap은 Map에서 상속받은 새 디폴트 메서드를 지원함과 동시에 스레드 안정성도 제공한다.  
+  
+
+  
+
