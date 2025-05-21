@@ -1,4 +1,4 @@
-package modern_Java.part3.chap09.Strategy;
+package modern_Java.part3.chap09.strategy;
 
 public class Validator {
     private final ValidationStrategy validationStrategy;

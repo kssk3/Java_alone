@@ -50,7 +50,7 @@ System.out.println("Hello Spring");
 ```java
 package lambda.start;
 
-import java_ad3.lambda.Procedure;
+import lambda.java.ad3.Procedure;
 import java.util.Random;
 
 public class Ex1RefMain {
@@ -124,7 +124,7 @@ public class Ex1RefMain {
 그래서 처음에 내가 작성한 코드는 이런 방식이다.
 
 ```java
-import java_ad3.lambda.Procedure;
+import lambda.java.ad3.Procedure;
 import java.util.Random;
 
 public class Ex1myRefMain {
@@ -194,7 +194,7 @@ class Print implements Procedure {
 ```java
 package lambda.start;
 
-import java_ad3.lambda.Procedure;
+import lambda.java.ad3.Procedure;
 import java.util.Random;
 
 // 익명 클래스 사용, 변수 제거, 익명 클래스의 참조값을 매개변수(파라미터)에 직접 전달
@@ -246,7 +246,7 @@ i = 3
 ### 익명 클래스를 람다로 변경해보자.
 
 ```java
-import java_ad3.lambda.Procedure;
+import lambda.java.ad3.Procedure;
 import java.util.Random;
 
 // 람다 사용
@@ -312,7 +312,7 @@ i = 3
 ```java
 package lambda.lambda1;
 
-import java_ad3.lambda.Procedure;
+import lambda.java.ad3.Procedure;
 
 public class InstanceMain {
 
@@ -388,7 +388,7 @@ interface SamInterface{
 ```java
 package lambda.lambda1;
 
-import java_ad3.lambda.lambda1.samInterface;
+import lambda1.lambda.java.ad3.samInterface;
 
 public class SamMain {
 
@@ -441,7 +441,7 @@ public interface MyFunction {
 - 반환 타입 : `int`
 
 ```java
-import java_ad3.lambda.MyFunction;
+import lambda.java.ad3.MyFunction;
 
 public static void Main(String[] args) {
     MyFunction myFunction = (int a, int b) -> a + b;
@@ -461,7 +461,7 @@ public static void Main(String[] args) {
 ```java
 package lambda.lambda2;
 
-import java_ad3.lambda.MyFunction;
+import lambda.java.ad3.MyFunction;
 
 // 1. 람다를 변수에 대입하기
 public class LambdaPassMain1 {
@@ -508,7 +508,7 @@ cal(sub).apply(1, 2) = -1
 같은 원리로 람다를 매개변수를 통해 메서드(함수)에 전달할 수 있다.
 
 ```java
-import java_ad3.lambda.MyFunction;
+import lambda.java.ad3.MyFunction;
 
 // 2. 람다를 메서드 함수에 전달하기
 public class LambdaPassMain2 {
@@ -576,7 +576,7 @@ void calculate(MyFunction myFunction = 001);
 ```java
 package lambda.lambda2;
 
-import java_ad3.lambda.MyFunction;
+import lambda.java.ad3.MyFunction;
 
 public class LambdaPassMain3 {
 
