@@ -76,4 +76,24 @@ public class Person {
         return Optional.ofNullable(car);
     }
 }
-```  
+```
+
+## 디폴트 액션과 Optional 언랩
+빈 Optional인 상황에서 기본값을 반환하도록 orElse로 Optional을 읽었다.  
+Optional 클래스는 이 외에도 Optional 인스턴스에 포함된 값을 읽는 다양한 방법을 제공한다.  
+  
+- `get()`은 값을 읽는 가장 간단한 메서드면서 동시에 가장 안전하지 않은 메서드다. 메서드 get은 래핑된 값이 있으면 해당 값을 반환하고  
+값이 없으면 `NoSuchElementException`을 발생시킨다. 따라서 Optional에 값이 반드시 있다고 가정할 수 있는 상황이 아니면 get 메서드를  
+사용하지 않는 것이 가장 바람직하다. 결국 이 상황은 중첩된 null 확인 코드를 넣는 상황과 크게 다르지 않다.
+- `orElse()` 메서드를 이용하면 Optional이 값을 포함하지 않을 때 기본값을 제공할 수 있다.  
+- `orElseGet(Supplier<? extends T>other)`는 orElse 메서드에 대응하는 게으른 버전의 메서드다.  
+Optional에 값이 없을 때만 Supplier가 실행되기 때문이다. 디폴트 메서드를 만드는 데 시간이 걸리거나(효율성 때문에)  
+Optional이 비어있을 때만 기본값을 생성하고 싶다면(기본값이 반드시 필요한 상황) orElseGet를 사용해야 한다.
+- `orElseThrow(Supplier<? extends X> exceptionSupplier)`는 Optional이 비어있을 때 예외를 발생시킨다는 점에서  
+get 메서드와 비슷하다. 하지만 이 메서드는 발생시킬 예외의 종류를 선택할 수 있다.  
+- `ifPresent(Consumer<? super T> consumer)`를 이용하면 값이 존재할 때 인수로 넘겨준 동작을 실행할 수 있다.  
+값이 없으면 아무 일도 일어나지 않는다.  
+- `ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction)` 이 메서드는 Optional이 비어있을 때  
+실행할 수 있는 Runnable을 인수로 받는다는 점만 `ifPresent`와 다르다.  
+  
+
