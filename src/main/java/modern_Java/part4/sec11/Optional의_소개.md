@@ -96,4 +96,12 @@ get 메서드와 비슷하다. 하지만 이 메서드는 발생시킬 예외의
 - `ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction)` 이 메서드는 Optional이 비어있을 때  
 실행할 수 있는 Runnable을 인수로 받는다는 점만 `ifPresent`와 다르다.  
   
+### 정리
+- 역사적으로 프로그래밍 언어세너느 null 참조로 값이 없는 상황을 표현해왔다.
+- 자바 8에서는 값이 있거나 없음을 표현할 수 있는 클래스 java.util.Optional\<T>를 제공한다.
+- 팩토리 메서드 `Optional.empty`, `Optional.of`, `Optional.ofNullable` 등을 이용해서 Optional 객체를 만들 수 있다.
+- Optional 클래스는 스트림과 비슷한 연산을 수행하는 `map`, `flatMap`, `filter` 등의 메서드를 제공한다.
+- Optional로 값이 없는 상황을 적절하게 처리하도록 강제할 수 있다. 즉 Optional로 예상치 못한 null 예외를 방지할 수 있다.
+- Optional을 활용하면 더 좋은 API를 설계할 수 있다. 즉, 사용자는 메서드의 시그니처만 보고도 Optional 값이  
+사용되거나 반환되는지 예측할 수 있다.  
 
